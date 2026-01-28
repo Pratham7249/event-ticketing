@@ -20,8 +20,8 @@ app.use(cors({
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1 && !origin.includes('vercel.app')) {
-      // Loose check for vercel.app previews
+    if (allowedOrigins.indexOf(origin) === -1 && !origin.includes('vercel.app') && !origin.includes('onrender.com')) {
+      // Loose check for vercel.app and onrender.com previews
       // return callback(new Error('The CORS policy for this site does not allow access from the specified Origin.'), false);
       // For now, simpler for you:
       return callback(null, true);
