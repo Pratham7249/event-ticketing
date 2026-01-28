@@ -7,7 +7,7 @@ const ExploreEvents = () => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     // Use API_URL from context if available, or fallback
-    const { API_URL } = useContext(AuthContext) || { API_URL: 'http://localhost:5005/api' };
+    const { API_URL } = useContext(AuthContext) || { API_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5005/api' };
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -69,8 +69,8 @@ const ExploreEvents = () => {
                                     <Link
                                         to={`/p/event/${event._id}`}
                                         className={`block w-full text-center py-2 rounded-lg font-semibold transition ${isFullyBooked
-                                                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                                                : 'bg-blue-600 text-white hover:bg-blue-700'
+                                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                            : 'bg-blue-600 text-white hover:bg-blue-700'
                                             }`}
                                     >
                                         {isFullyBooked ? 'Sold Out' : 'Book Ticket'}

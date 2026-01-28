@@ -9,8 +9,8 @@ const PublicEvent = () => {
     const [message, setMessage] = useState(null); // { type: 'success'|'error', text, ticketId? }
     const [loading, setLoading] = useState(true);
 
-    // Ideally this should be from context or .env, simplified here
-    const API_URL = 'http://localhost:5005/api';
+    // Use Env Var or Fallback
+    const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5005/api';
 
     useEffect(() => {
         const fetchEvent = async () => {

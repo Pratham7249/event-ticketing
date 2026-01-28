@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api';
 import AuthContext from '../context/AuthContext';
 
 const EventManager = () => {
@@ -16,8 +16,8 @@ const EventManager = () => {
     const fetchData = async () => {
         try {
             const [eventRes, regRes] = await Promise.all([
-                axios.get(`${API_URL}/events/${eventId}`),
-                axios.get(`${API_URL}/registrations/event/${eventId}`)
+                api.get(`/events/${eventId}`),
+                api.get(`/registrations/event/${eventId}`)
             ]);
             setEvent(eventRes.data);
             setRegistrations(regRes.data);
@@ -28,7 +28,7 @@ const EventManager = () => {
 
     const handleStatusChange = async (id, status) => {
         try {
-            await axios.patch(`${API_URL}/registrations/${id}`, { status });
+            await api.patch(`/registrations/${id}`, { status });
             fetchData(); // Refresh data to update counts/status
         } catch (err) {
             alert(err.response?.data?.msg || 'Error updating status');

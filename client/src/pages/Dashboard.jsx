@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
-import axios from 'axios';
+import api from '../api';
 
 const Dashboard = () => {
     const { user, logout, API_URL } = useContext(AuthContext);
@@ -17,7 +17,7 @@ const Dashboard = () => {
 
     const fetchEvents = async () => {
         try {
-            const res = await axios.get(`${API_URL}/events/my-events`);
+            const res = await api.get('/events/my-events');
             setEvents(res.data);
         } catch (err) {
             console.error(err);
@@ -27,7 +27,7 @@ const Dashboard = () => {
     const handleCreateEvent = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`${API_URL}/events`, newEvent);
+            await api.post('/events', newEvent);
             setShowModal(false);
             fetchEvents();
             setNewEvent({ title: '', description: '', date: '', venue: '', totalTickets: '', approvalMode: 'auto' });
