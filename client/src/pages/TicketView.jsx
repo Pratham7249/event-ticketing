@@ -42,21 +42,21 @@ const TicketView = () => {
     if (!ticket) return null;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
             <div className="bg-white w-full max-w-sm rounded-3xl shadow-2xl overflow-hidden relative">
-                <div className="bg-gray-800 text-white p-6 text-center relative z-10">
+                <div className="bg-gradient-to-r from-blue-900 to-gray-900 text-white p-6 text-center relative z-10">
                     <h2 className="text-2xl font-bold tracking-wider uppercase mb-1">{ticket.eventId.title}</h2>
-                    <p className="text-gray-400 text-sm">Admit One</p>
+                    <p className="text-gray-300 text-sm">Admit One</p>
 
                     {/* Decorative circles */}
-                    <div className="absolute -bottom-3 -left-3 w-6 h-6 bg-purple-600 rounded-full z-20"></div>
-                    <div className="absolute -bottom-3 -right-3 w-6 h-6 bg-purple-600 rounded-full z-20"></div>
+                    <div className="absolute -bottom-3 -left-3 w-6 h-6 bg-gray-900 rounded-full z-20"></div>
+                    <div className="absolute -bottom-3 -right-3 w-6 h-6 bg-gray-900 rounded-full z-20"></div>
                 </div>
 
                 <div className="p-8 relative border-t-2 border-dashed border-gray-300 bg-white">
                     {/* Cutout illusion */}
-                    <div className="absolute -top-3 -left-3 w-6 h-6 bg-purple-600 rounded-full"></div>
-                    <div className="absolute -top-3 -right-3 w-6 h-6 bg-blue-500 rounded-full"></div>
+                    <div className="absolute -top-3 -left-3 w-6 h-6 bg-gray-900 rounded-full"></div>
+                    <div className="absolute -top-3 -right-3 w-6 h-6 bg-gray-900 rounded-full"></div>
 
                     {/* QR Code Section */}
                     <div className="flex justify-center mb-6">

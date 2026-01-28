@@ -37,11 +37,18 @@ const PublicEvent = () => {
                 ...formData
             });
 
+            // Handle both new and existing registrations
             if (res.data.status === 'approved') {
-                setMessage({ type: 'success', text: 'Registration Successful! Here is your ticket.', ticketId: res.data.ticketId });
-            } else {
-                setMessage({ type: 'info', text: 'Registration received. Current status: Pending approval.', ticketId: res.data.ticketId });
+                const successMsg = res.data.msg || 'Registration Successful! Here is your ticket.';
+                setMessage({ type: 'success', text: successMsg, ticketId: res.data.ticketId });
+            } else if (res.data.status === 'pending') {
+                const pendingMsg = res.data.msg || 'Registration received. Current status: Pending approval.';
+                setMessage({ type: 'info', text: pendingMsg, ticketId: res.data.ticketId });
+            } else if (res.data.status === 'rejected') {
+                const rejectedMsg = res.data.msg || 'Registration rejected.';
+                setMessage({ type: 'error', text: rejectedMsg });
             }
+
             setFormData({ userName: '', userEmail: '' });
         } catch (err) {
             setMessage({ type: 'error', text: err.response?.data?.msg || 'Registration failed' });

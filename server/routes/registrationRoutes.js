@@ -20,8 +20,34 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ msg: 'Event is fully booked' });
     }
 
-    // Check if user already registered? (Optional but good practice)
-    // For now, simplicity as per requirements.
+    // Check if user already registered
+    const existingRegistration = await Registration.findOne({ eventId, userEmail });
+    if (existingRegistration) {
+      if (existingRegistration.status === 'approved') {
+        return res.status(200).json({ 
+          msg: 'You are already approved!', 
+          ...existingRegistration._doc,
+          existing: true // Flag for frontend
+        });
+      }
+      if (existingRegistration.status === 'pending') {
+        return res.status(200).json({ 
+           msg: 'Registration already pending approval.',
+           ...existingRegistration._doc,
+           existing: true
+        });
+      }
+      if (existingRegistration.status === 'rejected') {
+          // Policy: If rejected, we notify them. 
+          // Option: Allow re-apply? The requirement implies "work like if i approve then ... show the create approved".
+          // If rejected, we probably shouldn't show approved QR. We'll show rejected status.
+          return res.status(200).json({
+              msg: 'Your previous registration was rejected.',
+              ...existingRegistration._doc,
+              existing: true
+          });
+      }
+    }
 
     let status = 'pending';
     if (event.approvalMode === 'auto') {
