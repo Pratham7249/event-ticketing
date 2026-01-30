@@ -141,9 +141,13 @@ router.patch('/:id', auth, async (req, res) => {
 // @access  Public
 router.get('/ticket/:ticketId', async (req, res) => {
   try {
-    const registration = await Registration.findOne({ ticketId: req.params.ticketId }).populate('eventId', 'title date venue description');
+    // CRITICAL: Find by 'ticketId' (UUID), not '_id' (MongoDB ObjectId)
+    const registration = await Registration.findOne({ ticketId: req.params.ticketId })
+      .populate('eventId', 'title date venue description');
     
-    if (!registration) return res.status(404).json({ msg: 'Ticket not found' });
+    if (!registration) {
+      return res.status(404).json({ msg: 'Ticket not found' });
+    }
 
     if (registration.status !== 'approved') {
       return res.status(403).json({ msg: 'Access Denied: Ticket not approved' });
@@ -151,7 +155,7 @@ router.get('/ticket/:ticketId', async (req, res) => {
 
     res.json(registration);
   } catch (err) {
-    console.error(err.message);
+    console.error('Ticket Fetch Error:', err.message);
     res.status(500).send('Server Error');
   }
 });

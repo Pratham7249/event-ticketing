@@ -92,7 +92,16 @@ const EventManager = () => {
                                         </div>
                                     )}
                                     {reg.status === 'approved' && (
-                                        <span className="text-gray-400 text-sm">Approved</span>
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-gray-400 text-sm">Approved</span>
+                                            <Link
+                                                to={`/ticket/${reg.ticketId}`}
+                                                target="_blank"
+                                                className="text-blue-500 hover:text-blue-700 text-xs underline"
+                                            >
+                                                View Ticket
+                                            </Link>
+                                        </div>
                                     )}
                                     {reg.status === 'rejected' && (
                                         <span className="text-gray-400 text-sm">Rejected</span>
