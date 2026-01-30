@@ -7,7 +7,7 @@ const ExploreEvents = () => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     // Use API_URL from context if available, or fallback
-    const { API_URL } = useContext(AuthContext) || { API_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5005/api' };
+    const { API_URL } = useContext(AuthContext) || { API_URL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api' };
 
     useEffect(() => {
         const fetchEvents = async () => {

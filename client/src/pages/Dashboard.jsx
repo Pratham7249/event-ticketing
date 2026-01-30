@@ -85,7 +85,6 @@ const Dashboard = () => {
                                 </Link>
                                 <Link
                                     to={`/p/event/${event._id}`}
-                                    target="_blank"
                                     className="flex-1 text-center bg-blue-50 text-blue-600 py-2 rounded hover:bg-blue-100"
                                 >
                                     View Public

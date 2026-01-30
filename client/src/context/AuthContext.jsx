@@ -8,7 +8,8 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     // API_URL is handled in api.js, but we might expose the base for informational purposes if needed
-    const API_URL = 'http://localhost:5005/api';
+    // API_URL is handled in api.js, but we might expose the base for informational purposes if needed
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
     useEffect(() => {
         const loadUser = async () => {
