@@ -7,7 +7,10 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://event-ticketing-1-b0or.onrender.com'],
+  credentials: true
+}));
 
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
