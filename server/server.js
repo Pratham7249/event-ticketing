@@ -7,29 +7,7 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-
-// CORS Configuration
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:5174',
-  // Add your Vercel domain here after deployment, e.g., 'https://your-app.vercel.app'
-  'https://event-ticketing-client.vercel.app' 
-];
-
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1 && !origin.includes('vercel.app') && !origin.includes('onrender.com')) {
-      // Loose check for vercel.app and onrender.com previews
-      // return callback(new Error('The CORS policy for this site does not allow access from the specified Origin.'), false);
-      // For now, simpler for you:
-      return callback(null, true);
-    }
-    return callback(null, true);
-  },
-  credentials: true
-}));
+app.use(cors());
 
 const { MongoMemoryServer } = require('mongodb-memory-server');
 

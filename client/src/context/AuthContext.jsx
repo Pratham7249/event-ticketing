@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     // API_URL is handled in api.js, but we might expose the base for informational purposes if needed
-    // or just use api instance.
+    const API_URL = 'http://localhost:5005/api';
 
     useEffect(() => {
         const loadUser = async () => {
